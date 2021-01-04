@@ -16,14 +16,14 @@
         <module>adl-common</module>
         <module>adl-sale-rest</module>
         <module>adl-sale-service</module>
-        <module>adl-sale-entity</module>
+        <module>adl-sale-domain</module>
         <module>adl-purchase-rest</module>
         <module>adl-purchase-service</module>
-        <module>adl-purchase-entity</module>
+        <module>adl-purchase-domain</module>
         <module>adl-base-rest</module>
         <module>adl-base-service</module>
-        <module>adl-base-entity</module>
-        <module>adl-base-entity</module>
+        <module>adl-base-domain</module>
+        <module>adl-base-domain</module>
     </modules>
 
     <!--属性值定义-->
