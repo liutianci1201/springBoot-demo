@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>com.huaxin.cloud</groupId>
-            <artifactId>adl-base-entity</artifactId>
+            <artifactId>adl-base-domain</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

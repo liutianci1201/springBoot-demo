@@ -17,11 +17,5 @@
             <artifactId>adl-base-service</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.huaxin.cloud</groupId>
-            <artifactId>adl-common</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 </project>

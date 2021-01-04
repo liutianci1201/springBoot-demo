@@ -14,13 +14,13 @@
     <dependencies>
         <dependency>
             <groupId>com.huaxin.cloud</groupId>
-            <artifactId>adl-purchase-entity</artifactId>
+            <artifactId>adl-purchase-domain</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.huaxin.cloud</groupId>
-            <artifactId>adl-common</artifactId>
+            <artifactId>adl-base-service</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
