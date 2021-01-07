@@ -9,21 +9,20 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>hx-tms-adl</name>
-    <description>华新物流场内物流发货系统</description>
+    <description>华新水泥场内物流发货系统</description>
 
     <modules>
         <module>adl-starter</module>
         <module>adl-common</module>
         <module>adl-sale-rest</module>
         <module>adl-sale-service</module>
-        <module>adl-sale-domain</module>
+        <module>adl-sale-model</module>
         <module>adl-purchase-rest</module>
         <module>adl-purchase-service</module>
-        <module>adl-purchase-domain</module>
+        <module>adl-purchase-model</module>
         <module>adl-base-rest</module>
         <module>adl-base-service</module>
-        <module>adl-base-domain</module>
-        <module>adl-base-domain</module>
+        <module>adl-base-model</module>
     </modules>
 
     <!--属性值定义-->

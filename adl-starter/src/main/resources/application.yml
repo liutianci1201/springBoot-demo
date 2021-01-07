@@ -12,9 +12,9 @@ spring:
       filters: stat
       driver-class-name: com.mysql.cj.jdbc.Driver
       #基本属性
-      url: jdbc:mysql://10.248.61.27:3306/tms_tray_storage?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-      username: temp
-      password: Temp!2019
+      url: jdbc:mysql://localhost:3306/tms_dl?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+      username: root
+      password: root
       #配置初始化大小/最小/最大
       initial-size: 1
       min-idle: 1
@@ -36,6 +36,10 @@ spring:
     host: 10.248.61.27
     port: 6379
     timeout: 10s
+  #引入jap配置启动时检查字段
+  jpa:
+    hibernate:
+      ddl-auto: update
 
 ## 该配置节点为独立的节点，放在spring的节点下，导致配置无法被识别
 #pagehelper

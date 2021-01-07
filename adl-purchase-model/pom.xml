@@ -9,12 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>adl-sale-entity</artifactId>
+    <artifactId>adl-purchase-model</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.huaxin.cloud</groupId>
-            <artifactId>adl-base-domain</artifactId>
+            <artifactId>adl-base-model</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
