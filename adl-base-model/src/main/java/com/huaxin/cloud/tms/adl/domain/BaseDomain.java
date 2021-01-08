@@ -9,22 +9,22 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * <p>
- *     Domain 基类
+ * Domain 基类
+ * 字段注解分为两部分
+ * 1.@Column(name = "XXX_XXX")、@Id、@Transient、@Table、@Entity 整合jpa自动生成字段减少部署运维
+ * 2.其余注解为mybatis-plus注解作为数据库映射
  * </p>
- *
  * @author LiuTianci
  * @date 2021-01-04 10:31
  */
 @Data
+@MappedSuperclass
 @ApiModel(description = "Domain 基类")
 public class BaseDomain implements Serializable {
 
@@ -34,6 +34,7 @@ public class BaseDomain implements Serializable {
     @TableId(type = IdType.AUTO)
     @ApiModelProperty(value = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", unique = true, nullable = false,columnDefinition="bigint(20) COMMENT '主键id'")
     private Long id;
 
     /**
@@ -41,7 +42,7 @@ public class BaseDomain implements Serializable {
      */
     @TableField("create_by")
     @ApiModelProperty(value = "创建者")
-    @Column(name = "id", unique = true, nullable = false,columnDefinition="bigint(20) COMMENT '主键id'")
+    @Column(name = "create_by")
     private String createBy;
 
     /**

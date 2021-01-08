@@ -3,7 +3,6 @@ package com.huaxin.cloud.tms.adl.config;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -14,7 +13,7 @@ import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -28,7 +27,7 @@ import java.util.Map;
  * @date 2021-01-07 10:16
  */
 @Slf4j
-@Component
+@Configuration
 public class ShiroConfig {
 
     @Value("${spring.redis.host}")
@@ -47,12 +46,11 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/login.do", "anon");
-        filterChainDefinitionMap.put("/menu.do", "anon");
-        filterChainDefinitionMap.put("/function.do", "anon");
+        filterChainDefinitionMap.put("/logout", "anon");
+        filterChainDefinitionMap.put("/menu", "anon");
+        filterChainDefinitionMap.put("/function", "anon");
         filterChainDefinitionMap.put("/bill/checkPrintHYReport.do", "anon");
         filterChainDefinitionMap.put("/bill/printHYReport.do", "anon");
-        filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/deliveryOrderPick/PickOrderSap.do", "anon");
         filterChainDefinitionMap.put("/ztLines/getZtlinesByType", "anon");
         filterChainDefinitionMap.put("/outnumInfo/getOutNumAndFactory", "anon");
@@ -94,22 +92,13 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/todo/**", "anon");
 
         // 登录成功后要跳转的链接
-        shiroFilterFactoryBean.setSuccessUrl("/toIndex.do");
-        //未授权界面;
-        shiroFilterFactoryBean.setLoginUrl("/un_auth");
+//        shiroFilterFactoryBean.setSuccessUrl("/toIndex.do");
+        shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
 
-    @Bean
-    public SecurityManager securityManager() {
-        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(myRealm());
-        securityManager.setCacheManager(cacheManager());
-        securityManager.setSessionManager(sessionManager());
-        return securityManager;
-    }
 
     @Bean
     public MyRealm myRealm() {
@@ -123,22 +112,31 @@ public class ShiroConfig {
         return redisCacheManager;
     }
 
-
-    @Bean
-    public RedisManager redisManager() {
-        RedisManager redisManager = new RedisManager();
-        redisManager.setHost(host);
-        redisManager.setPort(port);
-        redisManager.setTimeout(timeout);
-        return redisManager;
-    }
-
     @Bean
     public DefaultWebSessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new MySessionManager();
         sessionManager.setSessionDAO(redisSessionDAO());
         return sessionManager;
     }
+
+    @Bean
+    public SecurityManager securityManager() {
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        securityManager.setRealm(myRealm());
+        securityManager.setCacheManager(cacheManager());
+        securityManager.setSessionManager(sessionManager());
+        return securityManager;
+    }
+
+    @Bean
+    public RedisManager redisManager() {
+        RedisManager redisManager = new RedisManager();
+        redisManager.setHost(host+":"+port);
+        redisManager.setDatabase(1);
+        redisManager.setTimeout(timeout);
+        return redisManager;
+    }
+
 
     @Bean
     public RedisSessionDAO redisSessionDAO() {
@@ -159,11 +157,6 @@ public class ShiroConfig {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
-    }
-
-    @Bean
-    public LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
-        return new LifecycleBeanPostProcessor();
     }
 
     @Bean

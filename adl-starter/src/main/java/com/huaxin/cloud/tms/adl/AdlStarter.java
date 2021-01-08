@@ -3,6 +3,7 @@ package com.huaxin.cloud.tms.adl;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -13,7 +14,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author LiuTianci
  * @date 2020-12-29 14:22
  */
-@MapperScan(basePackages = "com.huaxin.cloud.tms.adl.mapper")
 @SpringBootApplication
 @EnableTransactionManagement
 public class AdlStarter {

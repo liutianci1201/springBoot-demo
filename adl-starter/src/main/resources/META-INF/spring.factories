@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.huaxin.cloud.tms.adl.config.AdlStartConfiguration

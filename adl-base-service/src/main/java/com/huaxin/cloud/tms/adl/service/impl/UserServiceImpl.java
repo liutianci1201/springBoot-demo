@@ -48,6 +48,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
         token.setRememberMe(true);
+        subject.login(token);
         LoginVO loginVO = new LoginVO();
         loginVO.setToken(subject.getSession().getId().toString());
         loginVO.setUserName(userName);
@@ -57,11 +58,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public List<Permission> menuList() {
-        User catchUser = (User) SecurityUtils.getSubject().getPrincipal();
-        if (catchUser == null){
+        String userName = (String) SecurityUtils.getSubject().getPrincipal();
+        if (StringUtils.isEmpty(userName)){
             throw new HuaxinCloudException("获取当前用户失败，请重新登录");
         }
-        User user = getOne(Wrappers.lambdaQuery(User.class).eq(User::getUserName, catchUser.getUserName()), false);
+        User user = getOne(Wrappers.lambdaQuery(User.class).eq(User::getUserName, userName), false);
         List<UserRole> roles = userRoleService.list(Wrappers.lambdaQuery(UserRole.class).eq(UserRole::getUserId, user.getId()));
         if (roles.size() == 0){
             throw new HuaxinCloudException("当前用户未分配角色");

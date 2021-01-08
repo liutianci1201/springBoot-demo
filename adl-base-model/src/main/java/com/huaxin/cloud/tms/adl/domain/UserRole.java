@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
@@ -19,9 +20,10 @@ import javax.persistence.Table;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @TableName("t_user_role")
 @Table(name = "t_user_role")
-public class UserRole {
+public class UserRole extends BaseDomain{
 
     @Column(name = "role_id")
     private Integer roleId;

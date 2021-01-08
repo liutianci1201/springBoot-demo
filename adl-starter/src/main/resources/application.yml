@@ -3,6 +3,10 @@ server:
   servlet:
     context-path: /tms-facdel
 spring:
+  redis:
+    host: 10.248.61.27
+    port: 6379
+    timeout: 1000
   datasource:
     name: mysql_test
     type: com.alibaba.druid.pool.DruidDataSource
@@ -12,7 +16,7 @@ spring:
       filters: stat
       driver-class-name: com.mysql.cj.jdbc.Driver
       #基本属性
-      url: jdbc:mysql://localhost:3306/tms_dl?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+      url: jdbc:mysql://localhost:3306/tms_adl?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
       username: root
       password: root
       #配置初始化大小/最小/最大
@@ -32,10 +36,6 @@ spring:
       #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
-  redis:
-    host: 10.248.61.27
-    port: 6379
-    timeout: 10s
   #引入jap配置启动时检查字段
   jpa:
     hibernate:

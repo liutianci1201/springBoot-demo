@@ -29,7 +29,6 @@ import java.util.List;
 @Api(tags = "登录")
 @Slf4j
 @RestController
-@RequestMapping(value = "/auth")
 public class LoginRest {
 
     @Resource
@@ -74,16 +73,19 @@ public class LoginRest {
         try {
             return HttpResult.success(userService.menuList());
         }catch (Exception e){
-            return HttpResult.failure(ResultCodeEnum.SERVER_ERROR.getCode(), "用户已被禁用");
+            log.error(e.getMessage(), e);
+            return HttpResult.failure(ResultCodeEnum.SERVER_ERROR.getCode(), e.getMessage());
         }
     }
 
-    @GetMapping("/logout")
+    @ApiOperation(value = "用户登出")
+    @GetMapping(value = "/logout")
     public HttpResult logout() {
         try {
             userService.logout();
             return HttpResult.success();
         }catch (Exception e){
+            log.error(e.getMessage(), e);
             return HttpResult.failure(ResultCodeEnum.SERVER_ERROR.getCode(), e.getMessage());
         }
 
