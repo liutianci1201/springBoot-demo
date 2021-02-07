@@ -88,7 +88,7 @@ public class Swagger2Config extends WebMvcConfigurationSupport {
     /**
      * 防止@EnableMvc把默认的静态资源路径覆盖了，手动设置的方式
      *
-     * @param registry
+     * @param registry 过滤对象
      */
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
